@@ -1,7 +1,7 @@
 ﻿using System;
 namespace AirlineService.Data
 {
-    public class FlightDAO
+    public class FlightDAO : IFlightDAO
     {
         private string connString =
             @"Server=localhost, 1433;
