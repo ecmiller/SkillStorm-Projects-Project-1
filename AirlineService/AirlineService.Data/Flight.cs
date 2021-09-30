@@ -16,21 +16,21 @@ namespace AirlineService.Data
 
         [Display(Name = "Departure Time")]
         [DataType(DataType.DateTime)]
-        public string DepartureTime { get; set; }
+        public DateTime DepartureTime { get; set; }
 
         [Display(Name = "Arriving At")]
         public string ArrivalLocation { get; set; }
 
         [Display(Name = "Arrival Time")]
         [DataType(DataType.DateTime)]
-        public string ArrivalTime { get; set; }
+        public DateTime ArrivalTime { get; set; }
 
         public List<Passenger> Passengers { get; set; }
         
         public Flight() { }
 
-        public Flight(string airline, string departurelocation, string departureTime, string arrivalLocation,
-            string arrivalTime)
+        public Flight(string airline, string departurelocation, DateTime departureTime, string arrivalLocation,
+            DateTime arrivalTime)
         {
             this.Airline = airline;
             this.DepartureLocation = departurelocation;
