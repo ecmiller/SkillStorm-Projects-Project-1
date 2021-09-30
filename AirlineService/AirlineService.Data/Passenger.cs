@@ -12,12 +12,12 @@ namespace AirlineService.Data
         [DataType(DataType.Text)]
         public string Name { get; set; } // Name
 
+        [Display(Name = "Age")]
+        public int Age { get; set; } // Age
+
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; } // Email
-
-        [Display(Name = "Age")]
-        public int Age { get; set; } // Age
 
         [Display(Name = "Bookings")]
         public List<int> Bookings { get; set; } // Booking/confirmation numbers

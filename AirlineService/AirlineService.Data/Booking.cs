@@ -4,9 +4,9 @@ namespace AirlineService.Data
 
     public class Booking
     {
+        public int BookingID { get; set; }
         public int PassengerID { get; set; }
         public int FlightID { get; set; }
-        public string BookingString { get; set; }
 
         public Booking() { }
 
@@ -14,13 +14,12 @@ namespace AirlineService.Data
         {
             this.PassengerID = passengerID;
             this.FlightID = flightID;
-            this.BookingString = $"F{flightID}-P{passengerID}";
         }
 
         public override string ToString()
         {
             // Returns a string F(flight number)-P(passenger number)
-            return this.BookingString;
+            return $"Booking: {this.BookingID}";
         }
     }
 }
