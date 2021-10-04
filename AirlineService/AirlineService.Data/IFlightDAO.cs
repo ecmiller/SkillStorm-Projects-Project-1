@@ -8,6 +8,6 @@ namespace AirlineService.Data
     {
         public IEnumerable<Flight> GetFlights();
         public void AddFlight(Flight flight);
-        public void GetFlight(int flightID);
+        public Flight GetFlight(int flightID);
     }
 }

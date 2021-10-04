@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@*@model IEnumerable<AirlineService.Flight>*@
+@model IEnumerable<AirlineService.Models.FlightViewModel>
+
+@{
+    ViewData["Title"] = "Flights";
+}
+
+<div class="text-center">
+    <h2>View All Flights</h2>
+    <a class="navbar-brand" asp-area="" asp-controller="Flights" asp-action="Create">Add Home</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Airline)</td>
+                <td>@Html.DisplayNameFor(model => model.DepartureLocation)</td>
+                <td>@Html.DisplayNameFor(model => model.DepartureTime)</td>
+                <td>@Html.DisplayNameFor(model => model.ArrivalLocation)</td>
+                <td>@Html.DisplayNameFor(model => model.ArrivalTime)</td>
+                <td>@Html.DisplayNameFor(model => model.SeatsRemaining)</td>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var flight in Model)
+            {
+            <tr>
+                <td>@Html.DisplayFor(modelitem => flight.Airline)</td>
+                <td>@Html.DisplayFor(modelitem => flight.DepartureLocation)</td>
+                <td>@Html.DisplayFor(modelitem => flight.DepartureTime)</td>
+                <td>@Html.DisplayFor(modelitem => flight.ArrivalLocation)</td>
+                <td>@Html.DisplayFor(modelitem => flight.ArrivalTime)</td>
+                <td>@Html.DisplayFor(modelitem => flight.SeatsRemaining)</td>
+                <td>@Html.ActionLink("Details", "Details", new { id = flight.FlightID })</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

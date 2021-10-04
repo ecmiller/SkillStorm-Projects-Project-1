@@ -13,17 +13,17 @@ namespace AirlineService.Data
 
         public FlightDAO() { }
 
-        void IFlightDAO.AddFlight(Flight flight)
+        public void AddFlight(Flight flight)
         {
             throw new NotImplementedException();
         }
 
-        void IFlightDAO.GetFlight(int flightID)
+        public Flight GetFlight(int flightID)
         {
             throw new NotImplementedException();
         }
 
-        IEnumerable<Flight> IFlightDAO.GetFlights()
+        public IEnumerable<Flight> GetFlights()
         {
             throw new NotImplementedException();
         }

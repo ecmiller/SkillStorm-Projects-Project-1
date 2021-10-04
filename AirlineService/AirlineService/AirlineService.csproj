@@ -14,11 +14,15 @@
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Core" />
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration" />
+    <None Remove="Views\Flights\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc" Version="5.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Core" Version="5.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration" Version="5.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Flights\" />
   </ItemGroup>
 </Project>
