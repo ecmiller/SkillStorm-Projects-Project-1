@@ -39,5 +39,23 @@ namespace AirlineService.Data
             this.ArrivalTime = arrivalTime;
             this.SeatsRemaining = seatsRemaining;
         }
+
+        public Flight(int flightID, string airline, string departurelocation, DateTime departureTime, string arrivalLocation,
+            DateTime arrivalTime, int seatsRemaining)
+        {
+            this.FlightID = flightID;
+            this.Airline = airline;
+            this.DepartureLocation = departurelocation;
+            this.DepartureTime = departureTime;
+            this.ArrivalLocation = arrivalLocation;
+            this.ArrivalTime = arrivalTime;
+            this.SeatsRemaining = seatsRemaining;
+        }
+
+        public override string ToString()
+        {
+
+            return $"FlightID: {this.FlightID}";
+        }
     }
 }

@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AirlineService.Controllers
 {
-    public class FlightController : Controller
+    public class FlightsController : Controller
     {
         private readonly IFlightDAO flightDAO;
 
         
-        public FlightController(IFlightDAO FlightDao)
+        public FlightsController(IFlightDAO FlightDao)
         {
             this.flightDAO = FlightDao;
         }
@@ -27,6 +27,7 @@ namespace AirlineService.Controllers
             {
                 FlightViewModel temp = new FlightViewModel
                 {
+                    FlightID = flight.FlightID,
                     Airline = flight.Airline,
                     DepartureLocation = flight.DepartureLocation,
                     DepartureTime = flight.DepartureTime,
