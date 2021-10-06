@@ -1,0 +1,64 @@
+@model AirlineService.Data.Flight
+
+@{ ViewData["Title"] = "Edit"; }
+
+<h1>Edit Flight Information</h1>
+
+<div>
+    <h4>Flight ID: @Html.DisplayFor(model => model.FlightID)</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Airline" class="control-label"></label>
+                    <input asp-for="Airline" class="form-control" placeholder="@Html.DisplayFor(model => model.Airline)" />
+                    <span asp-validation-for="Airline" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DepartureLocation" class="control-label"></label>
+                    <input asp-for="DepartureLocation" class="form-control" placeholder="@Html.DisplayFor(model => model.DepartureLocation)" />
+                    <span asp-validation-for="DepartureLocation" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DepartureTime" class="control-label"></label>
+                    <input asp-for="DepartureTime" class="form-control" placeholder="@Html.DisplayFor(model => model.DepartureTime)" />
+                    <span asp-validation-for="DepartureTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ArrivalLocation" class="control-label"></label>
+                    <input asp-for="ArrivalLocation" class="form-control" placeholder="@Html.DisplayFor(model => model.ArrivalLocation)" />
+                    <span asp-validation-for="ArrivalLocation" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ArrivalTime" class="control-label"></label>
+                    <input asp-for="ArrivalTime" class="form-control" placeholder="@Html.DisplayFor(model => model.ArrivalTime)" />
+                    <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SeatsRemaining" class="control-label"></label>
+                    <input asp-for="SeatsRemaining" class="form-control" placeholder="@Html.DisplayFor(model => model.SeatsRemaining)" />
+                    <span asp-validation-for="SeatsRemaining" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaxCapacity" class="control-label"></label>
+                    <input asp-for="MaxCapacity" class="form-control" placeholder="@Html.DisplayFor(model => model.MaxCapacity)" />
+                    <span asp-validation-for="MaxCapacity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

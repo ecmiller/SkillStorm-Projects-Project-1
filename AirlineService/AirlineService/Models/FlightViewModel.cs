@@ -31,5 +31,9 @@ namespace AirlineService.Models
         [Required]
         [Display(Name = "Seats Remaining")]
         public int SeatsRemaining { get; set; }
+
+        [Required]
+        [Display(Name = "Max Capacity")]
+        public int MaxCapacity { get; set; }
     }
 }

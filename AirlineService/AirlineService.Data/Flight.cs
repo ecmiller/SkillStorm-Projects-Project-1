@@ -25,12 +25,16 @@ namespace AirlineService.Data
         [DataType(DataType.DateTime)]
         public DateTime ArrivalTime { get; set; }
 
+        [Display(Name = "Seats Remaining")]
         public int SeatsRemaining { get; set; }
-        
+
+        [Display(Name = "Max Capacity")]
+        public int MaxCapacity { get; set; }
+
         public Flight() { }
 
         public Flight(string airline, string departurelocation, DateTime departureTime, string arrivalLocation,
-            DateTime arrivalTime, int seatsRemaining)
+            DateTime arrivalTime, int seatsRemaining, int maxCapacity)
         {
             this.Airline = airline;
             this.DepartureLocation = departurelocation;
@@ -38,10 +42,11 @@ namespace AirlineService.Data
             this.ArrivalLocation = arrivalLocation;
             this.ArrivalTime = arrivalTime;
             this.SeatsRemaining = seatsRemaining;
+            this.MaxCapacity = maxCapacity;
         }
 
         public Flight(int flightID, string airline, string departurelocation, DateTime departureTime, string arrivalLocation,
-            DateTime arrivalTime, int seatsRemaining)
+            DateTime arrivalTime, int seatsRemaining, int maxCapacity)
         {
             this.FlightID = flightID;
             this.Airline = airline;
@@ -50,12 +55,12 @@ namespace AirlineService.Data
             this.ArrivalLocation = arrivalLocation;
             this.ArrivalTime = arrivalTime;
             this.SeatsRemaining = seatsRemaining;
+            this.MaxCapacity = maxCapacity;
         }
 
         public override string ToString()
         {
-
-            return $"FlightID: {this.FlightID}";
+            return $"FlightID: {this.FlightID} Departing: {this.DepartureLocation} {this.DepartureTime} Arriving: {this.ArrivalLocation} {this.ArrivalTime} Seats: {this.SeatsRemaining} / {this.MaxCapacity}";
         }
     }
 }

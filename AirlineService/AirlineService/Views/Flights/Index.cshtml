@@ -10,8 +10,7 @@
 
 <div class="text-center">
     <h2>View All Flights</h2>
-    <a class="navbar-brand" asp-area="" asp-controller="Flights" asp-action="Create">Add Flight</a>
-    <table class="table">
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <td>@Html.DisplayNameFor(model => model.Airline)</td>
@@ -20,6 +19,7 @@
                 <td>@Html.DisplayNameFor(model => model.ArrivalLocation)</td>
                 <td>@Html.DisplayNameFor(model => model.ArrivalTime)</td>
                 <td>@Html.DisplayNameFor(model => model.SeatsRemaining)</td>
+                <td>@Html.DisplayNameFor(model => model.MaxCapacity)</td>
                 <th></th>
             </tr>
         </thead>
@@ -33,9 +33,16 @@
                 <td>@Html.DisplayFor(modelitem => flight.ArrivalLocation)</td>
                 <td>@Html.DisplayFor(modelitem => flight.ArrivalTime)</td>
                 <td>@Html.DisplayFor(modelitem => flight.SeatsRemaining)</td>
+                <td>@Html.DisplayFor(modelitem => flight.MaxCapacity)</td>
+
+                <td>@Html.ActionLink("Edit", "Edit", new { id = flight.FlightID })</td>
                 <td>@Html.ActionLink("Details", "Details", new { id = flight.FlightID })</td>
             </tr>
             }
         </tbody>
     </table>
+</div>
+
+<div>
+    <a class="navbar-brand align-center" asp-area="" asp-controller="Flights" asp-action="Create" >Add Flight</a>
 </div>

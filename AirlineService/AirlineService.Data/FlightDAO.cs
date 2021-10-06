@@ -31,8 +31,14 @@ namespace AirlineService.Data
 
                     while (reader.Read())
                     {
-                        Flight temp = new Flight(reader["Airline"].ToString(), reader["DepartureLocation"].ToString(), DateTime.Parse(reader["DepartureTime"].ToString()),
-                            reader["ArrivalLocation"].ToString(), DateTime.Parse(reader["ArrivalTime"].ToString()), Convert.ToInt32(reader["SeatsRemaining"]));
+                        Flight temp = new Flight(reader["Airline"].ToString(),
+                            reader["DepartureLocation"].ToString(),
+                            DateTime.Parse(reader["DepartureTime"].ToString()),
+                            reader["ArrivalLocation"].ToString(),
+                            DateTime.Parse(reader["ArrivalTime"].ToString()),
+                            Convert.ToInt32(reader["SeatsRemaining"]),
+                            Convert.ToInt32(reader["MaxCapacity"]));
+
                         temp.FlightID = Convert.ToInt32(reader["FlightID"]);
 
                         FlightList.Add(temp);
@@ -79,6 +85,7 @@ namespace AirlineService.Data
                         flight.ArrivalLocation = reader["ArrivalLocation"].ToString();
                         flight.ArrivalTime = Convert.ToDateTime(reader["ArrivalTime"]);
                         flight.SeatsRemaining = Convert.ToInt32(reader["SeatsRemaining"]);
+                        flight.MaxCapacity = Convert.ToInt32(reader["MaxCapacity"]);
                     }
 
                 }
@@ -109,13 +116,14 @@ namespace AirlineService.Data
                 cmd.Parameters.AddWithValue("@ArrivalLocation", flight.ArrivalLocation);
                 cmd.Parameters.AddWithValue("@ArrivalTime", flight.ArrivalTime);
                 cmd.Parameters.AddWithValue("@SeatsRemaining", flight.SeatsRemaining);
-                cmd.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.Parameters.AddWithValue(@"MaxCapacity", flight.MaxCapacity);
+                cmd.Parameters.Add("@outID", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 try
                 {
                     conn.Open();
                     cmd.ExecuteNonQuery();
-                    id = (int)cmd.Parameters["@ID"].Value;
+                    id = (int)cmd.Parameters["@outID"].Value;
                     flight.FlightID = id;
                 }
                 catch (SqlException ex)
@@ -126,6 +134,31 @@ namespace AirlineService.Data
                 {
                     conn.Close();
                 }
+            }
+        }
+
+        public void RemoveFlight(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "DELETE * FROM airline.Flights WHERE FlightID = @ID";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ID", id);
+
+                try
+                {
+                    conn.Open();
+                    Console.WriteLine("Connecting to the airline database");
+
+                    cmd.ExecuteNonQuery();
+
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine("Failed to remove flight {0} from the database.\n{1}", id, ex.Message);
+                }
+                Console.WriteLine("RemoveFlight method end");
             }
         }
 
@@ -153,6 +186,39 @@ namespace AirlineService.Data
             }
 
             return dt;
+        }
+
+        public void UpdateFlight(Flight flight)
+        {
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string query = "[airline].[UpdateFlight]";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ID", flight.FlightID);
+                cmd.Parameters.AddWithValue("@Airline", flight.Airline);
+                cmd.Parameters.AddWithValue("@DepartureLocation", flight.DepartureLocation);
+                cmd.Parameters.AddWithValue("@DepartureTime", flight.DepartureTime);
+                cmd.Parameters.AddWithValue("@ArrivalLocation", flight.ArrivalLocation);
+                cmd.Parameters.AddWithValue("@ArrivalTime", flight.ArrivalTime);
+                cmd.Parameters.AddWithValue("@SeatsRemaining", flight.SeatsRemaining);
+                cmd.Parameters.AddWithValue(@"MaxCapacity", flight.MaxCapacity);
+
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine("Could not update flight!\n{0}", ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
     }
 }
