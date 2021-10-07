@@ -22,6 +22,10 @@ namespace AirlineService.Controllers
         public IActionResult Index()
         {
             IEnumerable<Flight> mFlights = flightDAO.GetFlights();
+            foreach(var f in mFlights)
+            {
+                Console.WriteLine("Testing indexing " + f.ToString());
+            }
             List<FlightViewModel> model = new List<FlightViewModel>();
 
             foreach (var flight in mFlights)
@@ -38,6 +42,7 @@ namespace AirlineService.Controllers
                     MaxCapacity = flight.MaxCapacity
                 };
 
+                Console.WriteLine("Made a flightviewmodel -- " + temp.ToString());
                 model.Add(temp);
             }
 
@@ -64,31 +69,30 @@ namespace AirlineService.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, IFormCollection collection)
         {
-            Flight newFlight = flightDAO.GetFlight(id);
+            Flight newFlight = new Flight();
+            newFlight.FlightID = id;
+            newFlight.Airline = collection["Airline"];
+            newFlight.DepartureLocation = collection["DepartureLocation"];
+            newFlight.DepartureTime = DateTime.Parse(collection["DepartureTime"]);
+            newFlight.ArrivalLocation = collection["ArrivalLocation"];
+            newFlight.ArrivalTime = DateTime.Parse(collection["ArrivalTime"]);
+            newFlight.SeatsRemaining = int.Parse(collection["SeatsRemaining"]);
+            newFlight.MaxCapacity = int.Parse(collection["MaxCapacity"]);
 
             Console.WriteLine("Flight sent into the edit call " + newFlight.ToString());
-
             if (ModelState.IsValid)
             {
-                newFlight.Airline = flight.Airline;
-                newFlight.DepartureLocation = flight.DepartureLocation;
-                newFlight.DepartureTime = flight.DepartureTime;
-                newFlight.ArrivalLocation = flight.ArrivalLocation;
-                newFlight.ArrivalTime = flight.ArrivalTime;
-                newFlight.SeatsRemaining = flight.SeatsRemaining;
-                newFlight.MaxCapacity = flight.MaxCapacity;
-
-                Console.WriteLine("Old flight data: " + flightDAO.GetFlight(flight.FlightID).ToString());
+                Console.WriteLine("Old flight data: " + flightDAO.GetFlight(newFlight.FlightID).ToString());
                 flightDAO.UpdateFlight(newFlight);
-                Console.WriteLine("New flight data" + flightDAO.GetFlight(flight.FlightID).ToString());
+                Console.WriteLine("New flight data" + flightDAO.GetFlight(newFlight.FlightID).ToString());
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             } else
             {
                 Console.WriteLine("Update ModelState was invalid");
             }
 
-            return View(flight);
+            return View();
         }
 
 

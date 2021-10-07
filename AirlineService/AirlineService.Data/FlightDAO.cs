@@ -28,9 +28,10 @@ namespace AirlineService.Data
                 {
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
-                    Flight temp = new Flight();
+                    
                     while (reader.Read())
                     {
+                        Flight temp = new Flight();
                         temp.FlightID = Convert.ToInt32(reader["FlightID"]);
                         temp.Airline = reader["Airline"].ToString();
                         temp.DepartureLocation = reader["DepartureLocation"].ToString();
@@ -40,7 +41,7 @@ namespace AirlineService.Data
                         temp.SeatsRemaining = Convert.ToInt32(reader["SeatsRemaining"]);
                         temp.MaxCapacity = Convert.ToInt32(reader["MaxCapacity"]);
 
-                        Console.WriteLine("Adding flight in the GetFlights method -- " + temp.ToString());
+                        Console.WriteLine("Got this flight from the database -- " + temp.ToString());
                         FlightList.Add(temp);
                     }
                 }
@@ -54,6 +55,8 @@ namespace AirlineService.Data
                 }
             }
 
+            Console.WriteLine("Final flight list:");
+            foreach (Flight f in FlightList) Console.WriteLine(f.ToString());
             return FlightList;
         }
 
@@ -123,8 +126,6 @@ namespace AirlineService.Data
                 {
                     conn.Open();
                     cmd.ExecuteNonQuery();
-                    id = (int)cmd.Parameters["@outID"].Value;
-                    flight.FlightID = id;
                 }
                 catch (SqlException ex)
                 {
@@ -149,7 +150,6 @@ namespace AirlineService.Data
                 try
                 {
                     conn.Open();
-                    Console.WriteLine("Connecting to the airline database");
 
                     cmd.ExecuteNonQuery();
 
@@ -165,7 +165,7 @@ namespace AirlineService.Data
         public DataTable GetTable()
         {
             DataTable dt = new DataTable();
-            string query = "Select * from airline.Flights";
+            string query = "SELECT * FROM airline.Flights";
 
             using (SqlConnection conn = new SqlConnection(connString))
             {

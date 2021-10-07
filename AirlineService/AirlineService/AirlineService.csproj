@@ -17,6 +17,7 @@
     <None Remove="Views\Flights\" />
     <None Remove="System.Data.SqlClient" />
     <None Remove="Microsoft.AspNet.WebApi.Client" />
+    <None Remove="Views\Passengers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc" Version="5.0.2" />
@@ -28,5 +29,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Flights\" />
+    <Folder Include="Views\Passengers\" />
   </ItemGroup>
 </Project>

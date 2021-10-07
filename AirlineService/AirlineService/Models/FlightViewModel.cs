@@ -35,5 +35,10 @@ namespace AirlineService.Models
         [Required]
         [Display(Name = "Max Capacity")]
         public int MaxCapacity { get; set; }
+
+        public override string ToString()
+        {
+            return $"FlightID: {this.FlightID} Departing: {this.DepartureLocation} {this.DepartureTime} Arriving: {this.ArrivalLocation} {this.ArrivalTime} Seats: {this.SeatsRemaining} / {this.MaxCapacity}";
+        }
     }
 }
