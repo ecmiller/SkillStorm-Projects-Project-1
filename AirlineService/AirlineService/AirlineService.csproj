@@ -31,4 +31,10 @@
     <Folder Include="Views\Flights\" />
     <Folder Include="Views\Passengers\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\css\all.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\css\all.css" />
+  </ItemGroup>
 </Project>

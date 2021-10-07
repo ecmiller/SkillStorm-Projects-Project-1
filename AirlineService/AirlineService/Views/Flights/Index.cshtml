@@ -44,5 +44,6 @@
 </div>
 
 <div>
-    <a class="navbar-brand align-center" asp-area="" asp-controller="Flights" asp-action="Create" >Add Flight</a>
+    <!-- When identifying which controller to use, leave out the 'Controller' part of the name-->
+    <input type="button" class="btn btn-primary" value="Add Flight" onclick="location.href='@Url.Action("Create", "Flights")'" />
 </div>

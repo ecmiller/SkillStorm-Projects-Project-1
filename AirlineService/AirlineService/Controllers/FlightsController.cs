@@ -22,10 +22,6 @@ namespace AirlineService.Controllers
         public IActionResult Index()
         {
             IEnumerable<Flight> mFlights = flightDAO.GetFlights();
-            foreach(var f in mFlights)
-            {
-                Console.WriteLine("Testing indexing " + f.ToString());
-            }
             List<FlightViewModel> model = new List<FlightViewModel>();
 
             foreach (var flight in mFlights)
@@ -42,7 +38,8 @@ namespace AirlineService.Controllers
                     MaxCapacity = flight.MaxCapacity
                 };
 
-                Console.WriteLine("Made a flightviewmodel -- " + temp.ToString());
+                // --- TESTING ---
+                // Console.WriteLine("Made a flightviewmodel -- " + temp.ToString());
                 model.Add(temp);
             }
 
@@ -79,7 +76,8 @@ namespace AirlineService.Controllers
             newFlight.SeatsRemaining = int.Parse(collection["SeatsRemaining"]);
             newFlight.MaxCapacity = int.Parse(collection["MaxCapacity"]);
 
-            Console.WriteLine("Flight sent into the edit call " + newFlight.ToString());
+            // --- TESTING ---
+            // Console.WriteLine("Flight sent into the edit call " + newFlight.ToString());
             if (ModelState.IsValid)
             {
                 Console.WriteLine("Old flight data: " + flightDAO.GetFlight(newFlight.FlightID).ToString());
@@ -100,6 +98,7 @@ namespace AirlineService.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            Console.WriteLine("Called create action");
             return View();
         }
 
@@ -121,10 +120,10 @@ namespace AirlineService.Controllers
                 Console.WriteLine("Adding flight " + newFlight.ToString());
                 flightDAO.AddFlight(newFlight);
 
-                return RedirectToAction("Details", newFlight.FlightID);
+                return RedirectToAction("Index");
             }
 
-            return View(flight);
+            return View();
         }
     }
 }

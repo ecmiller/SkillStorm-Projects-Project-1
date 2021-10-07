@@ -41,7 +41,8 @@ namespace AirlineService.Data
                         temp.SeatsRemaining = Convert.ToInt32(reader["SeatsRemaining"]);
                         temp.MaxCapacity = Convert.ToInt32(reader["MaxCapacity"]);
 
-                        Console.WriteLine("Got this flight from the database -- " + temp.ToString());
+                        // --- TESTING ---
+                        // Console.WriteLine("Got this flight from the database -- " + temp.ToString());
                         FlightList.Add(temp);
                     }
                 }
@@ -54,8 +55,8 @@ namespace AirlineService.Data
                     conn.Close();
                 }
             }
-
-            Console.WriteLine("Final flight list:");
+            // --- TESTING ---
+            // Console.WriteLine("Final flight list:");
             foreach (Flight f in FlightList) Console.WriteLine(f.ToString());
             return FlightList;
         }
@@ -106,8 +107,6 @@ namespace AirlineService.Data
 
         public void AddFlight(Flight flight)
         {
-            int id = 0;
-
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 string query = "[airline].[AddFlight]";
@@ -120,7 +119,6 @@ namespace AirlineService.Data
                 cmd.Parameters.AddWithValue("@ArrivalTime", flight.ArrivalTime);
                 cmd.Parameters.AddWithValue("@SeatsRemaining", flight.SeatsRemaining);
                 cmd.Parameters.AddWithValue(@"MaxCapacity", flight.MaxCapacity);
-                cmd.Parameters.Add("@outID", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 try
                 {
@@ -152,7 +150,6 @@ namespace AirlineService.Data
                     conn.Open();
 
                     cmd.ExecuteNonQuery();
-
                 }
                 catch (SqlException ex)
                 {
