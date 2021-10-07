@@ -33,8 +33,8 @@ namespace AirlineService.Controllers
                     DepartureTime = flight.DepartureTime,
                     ArrivalLocation = flight.ArrivalLocation,
                     ArrivalTime = flight.ArrivalTime,
-                    SeatsRemaining = flight.SeatsRemaining
-
+                    SeatsRemaining = flight.SeatsRemaining,
+                    MaxCapacity = flight.MaxCapacity
                 };
 
                 model.Add(temp);

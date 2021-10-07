@@ -28,19 +28,19 @@ namespace AirlineService.Data
                 {
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
-
+                    Flight temp = new Flight();
                     while (reader.Read())
                     {
-                        Flight temp = new Flight(reader["Airline"].ToString(),
-                            reader["DepartureLocation"].ToString(),
-                            DateTime.Parse(reader["DepartureTime"].ToString()),
-                            reader["ArrivalLocation"].ToString(),
-                            DateTime.Parse(reader["ArrivalTime"].ToString()),
-                            Convert.ToInt32(reader["SeatsRemaining"]),
-                            Convert.ToInt32(reader["MaxCapacity"]));
-
                         temp.FlightID = Convert.ToInt32(reader["FlightID"]);
+                        temp.Airline = reader["Airline"].ToString();
+                        temp.DepartureLocation = reader["DepartureLocation"].ToString();
+                        temp.DepartureTime = DateTime.Parse(reader["DepartureTime"].ToString());
+                        temp.ArrivalLocation = reader["ArrivalLocation"].ToString();
+                        temp.ArrivalTime = DateTime.Parse(reader["ArrivalTime"].ToString());
+                        temp.SeatsRemaining = Convert.ToInt32(reader["SeatsRemaining"]);
+                        temp.MaxCapacity = Convert.ToInt32(reader["MaxCapacity"]);
 
+                        Console.WriteLine("Adding flight in the GetFlights method -- " + temp.ToString());
                         FlightList.Add(temp);
                     }
                 }

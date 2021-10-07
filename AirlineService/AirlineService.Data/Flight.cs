@@ -11,14 +11,14 @@ namespace AirlineService.Data
         [Display(Name = "Airline")]
         public string Airline { get; set; }
 
-        [Display(Name = "Departing From")]
+        [Display(Name = "Departure Location")]
         public string DepartureLocation { get; set; }
 
         [Display(Name = "Departure Time")]
         [DataType(DataType.DateTime)]
         public DateTime DepartureTime { get; set; }
 
-        [Display(Name = "Arriving At")]
+        [Display(Name = "Arrival Location")]
         public string ArrivalLocation { get; set; }
 
         [Display(Name = "Arrival Time")]
