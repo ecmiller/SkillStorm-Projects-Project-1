@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AirlineService.Data;
 using AirlineService.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirlineService.Controllers
@@ -61,11 +62,12 @@ namespace AirlineService.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind] FlightViewModel flight)
+        public IActionResult Edit(int id, IFormCollection collection)
         {
-            Flight newFlight = flightDAO.GetFlight(flight.FlightID);
+            Flight newFlight = flightDAO.GetFlight(id);
 
-            Console.WriteLine("Flight sent into the edit call " + flight.ToString());
+            Console.WriteLine("Flight sent into the edit call " + newFlight.ToString());
+
             if (ModelState.IsValid)
             {
                 newFlight.Airline = flight.Airline;
@@ -80,7 +82,7 @@ namespace AirlineService.Controllers
                 flightDAO.UpdateFlight(newFlight);
                 Console.WriteLine("New flight data" + flightDAO.GetFlight(flight.FlightID).ToString());
 
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             } else
             {
                 Console.WriteLine("Update ModelState was invalid");
@@ -115,7 +117,7 @@ namespace AirlineService.Controllers
                 Console.WriteLine("Adding flight " + newFlight.ToString());
                 flightDAO.AddFlight(newFlight);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", newFlight.FlightID);
             }
 
             return View(flight);

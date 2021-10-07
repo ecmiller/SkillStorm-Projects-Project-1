@@ -7,9 +7,13 @@
   <ItemGroup>
     <None Remove="System.Data.SqlClient" />
     <None Remove="Microsoft.AspNet.WebApi.Client" />
+    <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+    <None Remove="Microsoft.VisualStudio.Web.CodeGenerators.Mvc" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc" Version="5.0.2" />
   </ItemGroup>
 </Project>
