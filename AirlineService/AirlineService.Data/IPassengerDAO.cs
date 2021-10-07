@@ -8,5 +8,7 @@ namespace AirlineService.Data
         public IEnumerable<Passenger> GetPassengers();
         public void AddPassenger(Passenger passenger);
         public Passenger GetPassenger(int passengerID);
+        public void UpdatePassenger(Passenger passenger);
+        public void RemovePassenger(int id);
     }
 }
