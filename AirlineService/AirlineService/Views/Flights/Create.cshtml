@@ -2,9 +2,9 @@
 
 @{ ViewData["Title"] = "Create"; }
 
-<h1>Create</h1>
+<h1>Create New Flight</h1>
 
-<h4>Flight</h4>
+<h4>Enter the details for the new flight below:</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -12,37 +12,37 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Airline" class="control-label"></label>
-                <input asp-for="Airline" class="form-control" />
+                <input asp-for="Airline" class="form-control" placeholder="Airline" />
                 <span asp-validation-for="Airline" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DepartureLocation" class="control-label"></label>
-                <input asp-for="DepartureLocation" class="form-control" />
+                <input asp-for="DepartureLocation" class="form-control" placeholder="City, State"/>
                 <span asp-validation-for="DepartureLocation" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DepartureTime" class="control-label"></label>
-                <input asp-for="DepartureTime" class="form-control" />
+                <input asp-for="DepartureTime" class="form-control" placeholder="12/01/2021 08:30:AM"/>
                 <span asp-validation-for="DepartureTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ArrivalLocation" class="control-label"></label>
-                <input asp-for="ArrivalLocation" class="form-control" />
+                <input asp-for="ArrivalLocation" class="form-control" placeholder="City, State"/>
                 <span asp-validation-for="ArrivalLocation" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ArrivalTime" class="control-label"></label>
-                <input asp-for="ArrivalTime" class="form-control" />
+                <input asp-for="ArrivalTime" class="form-control" placeholder="12/01/2021 09:30:AM"/>
                 <span asp-validation-for="ArrivalTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SeatsRemaining" class="control-label"></label>
-                <input asp-for="SeatsRemaining" class="form-control" />
+                <input asp-for="SeatsRemaining" class="form-control" placeholder="99"/>
                 <span asp-validation-for="SeatsRemaining" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="MaxCapacity" class="control-label"></label>
-                <input asp-for="MaxCapacity" class="form-control" />
+                <input asp-for="MaxCapacity" class="form-control" placeholder="100"/>
                 <span asp-validation-for="MaxCapacity" class="text-danger"></span>
             </div>
             <div class="form-group">

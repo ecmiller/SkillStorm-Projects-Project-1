@@ -30,11 +30,45 @@
   <ItemGroup>
     <Folder Include="Views\Flights\" />
     <Folder Include="Views\Passengers\" />
+    <Folder Include="wwwroot\fontawesome\" />
+    <Folder Include="wwwroot\fontawesome\webfonts\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Remove="wwwroot\css\all.css" />
+    <Content Remove="wwwroot\fontawesome\" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-brands-400.eot" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-brands-400.svg" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-brands-400.ttf" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-brands-400.woff" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-brands-400.woff2" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-regular-400.eot" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-regular-400.svg" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-regular-400.ttf" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-regular-400.woff" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-regular-400.woff2" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-solid-900.eot" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-solid-900.svg" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-solid-900.woff" />
+    <Content Remove="wwwroot\fontawesome\webfonts\fa-solid-900.woff2" />
+    <Content Remove="wwwroot\fontawesome\webfonts\" />
+    <Content Remove="wwwroot\fontawesome\all.css" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="wwwroot\css\all.css" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-brands-400.eot" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-brands-400.ttf" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-brands-400.woff" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-regular-400.eot" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-regular-400.ttf" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-regular-400.woff" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-solid-900.eot" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-solid-900.ttf" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-solid-900.woff" />
+    <None Include="wwwroot\fontawesome\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\fontawesome\all.css" />
   </ItemGroup>
 </Project>

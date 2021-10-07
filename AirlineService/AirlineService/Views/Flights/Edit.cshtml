@@ -5,7 +5,7 @@
 <h1>Edit Flight Information</h1>
 
 <div>
-    <h4>Flight ID: @Html.DisplayFor(model => model.FlightID)</h4>
+    <h4>Make changes to Flight #@Html.DisplayFor(model => model.FlightID) below:</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -47,7 +47,7 @@
                     <span asp-validation-for="MaxCapacity" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Save Changes" class="btn btn-primary" />
                 </div>
 
             </form>
