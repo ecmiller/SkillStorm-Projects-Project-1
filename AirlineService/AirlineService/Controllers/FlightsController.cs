@@ -87,7 +87,7 @@ namespace AirlineService.Controllers
                 return RedirectToAction("Index");
             } else
             {
-                Console.WriteLine("Update ModelState was invalid");
+                Console.WriteLine("[Update Action] ModelState was invalid");
             }
 
             return View();
@@ -98,7 +98,6 @@ namespace AirlineService.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            Console.WriteLine("Called create action");
             return View();
         }
 
@@ -124,6 +123,29 @@ namespace AirlineService.Controllers
             }
 
             return View();
+        }
+
+        // GET: Flights/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            return RedirectToAction("Index");
+        }
+
+        // POST: Flights/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                flightDAO.RemoveFlight(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

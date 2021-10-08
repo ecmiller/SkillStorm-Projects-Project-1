@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using AirlineService.Data;
+using AirlineService.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,15 +12,42 @@ namespace AirlineService.Controllers
 {
     public class PassengersController : Controller
     {
+        private readonly IPassengerDAO passengerDAO;
+
+        public PassengersController(IPassengerDAO passengerDAO)
+        {
+            this.passengerDAO = passengerDAO;
+        }
+
         // GET: Passengers
         public ActionResult Index()
         {
-            return View();
+            IEnumerable<Passenger> mPassengers = passengerDAO.GetPassengers();
+            List<PassengerViewModel> model = new List<PassengerViewModel>();
+
+            foreach (var pass in mPassengers)
+            {
+                PassengerViewModel temp = new PassengerViewModel
+                {
+                    PassengerID = pass.PassengerID,
+                    Name = pass.Name,
+                    Age = pass.Age,
+                    Email = pass.Email,
+                    Bookings = pass.Bookings
+                };
+
+                // --- TESTING ---
+                // Console.WriteLine("Made a flightviewmodel -- " + temp.ToString());
+                model.Add(temp);
+            }
+
+            return View(model);
         }
 
         // GET: Passengers/Details/5
         public ActionResult Details(int id)
         {
+            Passenger passenger = passengerDAO.GetPassenger(id);
             return View();
         }
 
@@ -30,24 +60,28 @@ namespace AirlineService.Controllers
         // POST: Passengers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([Bind] PassengerViewModel passenger)
         {
-            try
+            if(ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                Passenger newPassenger = new Passenger();
+                newPassenger.Name = passenger.Name;
+                newPassenger.Age = passenger.Age;
+                newPassenger.Email = passenger.Email;
+                newPassenger.Bookings = passenger.Bookings;
 
-                return RedirectToAction(nameof(Index));
+                Console.WriteLine("Adding passenger " + passenger.ToString());
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View();
         }
 
         // GET: Passengers/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Passenger model = passengerDAO.GetPassenger(id);
+            return View(model);
         }
 
         // POST: Passengers/Edit/5
@@ -55,22 +89,28 @@ namespace AirlineService.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
         {
-            try
-            {
-                // TODO: Add update logic here
+            Passenger newPassenger = new Passenger();
+            newPassenger.PassengerID = id;
+            newPassenger.Name = collection["Name"];
+            newPassenger.Age = int.Parse(collection["Age"]);
+            newPassenger.Email = collection["Email"];
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if(ModelState.IsValid)
             {
-                return View();
+                passengerDAO.UpdatePassenger(newPassenger);
+                return RedirectToAction("Index");
+            } else
+            {
+                Console.WriteLine("[Update Action] ModelState was invalid");
             }
+
+            return View();
         }
 
         // GET: Passengers/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return RedirectToAction("Index");
         }
 
         // POST: Passengers/Delete/5
@@ -80,8 +120,7 @@ namespace AirlineService.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
+                passengerDAO.RemovePassenger(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

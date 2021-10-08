@@ -140,7 +140,7 @@ namespace AirlineService.Data
         {
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "DELETE * FROM airline.Flights WHERE FlightID = @ID";
+                string query = "DELETE FROM airline.Flights WHERE FlightID = @ID";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@ID", id);
@@ -191,33 +191,5 @@ namespace AirlineService.Data
                 }
             }
         }
-
-        public DataTable GetTable()
-        {
-            DataTable dt = new DataTable();
-            string query = "SELECT * FROM airline.Flights";
-
-            using (SqlConnection conn = new SqlConnection(connString))
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-                try
-                {
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-
-                    conn.Open();
-
-                    adapter.Fill(dt);
-                }
-                catch (SqlException ex)
-                {
-                    Console.WriteLine("Error could not fill the data table!\n{0}", ex.Message);
-                }
-            }
-
-            return dt;
-        }
-        
-
     }
 }

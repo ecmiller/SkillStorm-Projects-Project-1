@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using AirlineService.Data;
 
-namespace AirlineService.Data
+namespace AirlineService.Models
 {
-    public class Passenger
+    public class PassengerViewModel
     {
         public int PassengerID { get; set; }
 
+        [Required]
         [Display(Name = "Name")]
         [DataType(DataType.Text)]
         public string Name { get; set; } // Name
 
+        [Required]
         [Display(Name = "Age")]
         public int Age { get; set; } // Age
 
@@ -21,16 +25,7 @@ namespace AirlineService.Data
         public string Email { get; set; } // Email
 
         [Display(Name = "Bookings")]
-        public List<Booking> Bookings { get; set; } // TODO
-
-        public Passenger() { }
-
-        public Passenger(string name, string email, int age)
-        {
-            this.Name = name;
-            this.Email = email;
-            this.Age = age;
-        }
+        public List<Booking> Bookings { get; set; }
 
         public override string ToString()
         {

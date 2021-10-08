@@ -1,5 +1,42 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model IEnumerable<AirlineService.Models.PassengerViewModel>;
+
 @{
+    ViewData["Title"] = "Flights";
 }
+<div class="text-center">
+    <h2>Viewing All Flights</h2>
+    <div class="contiainer-fluid">
+        <table class="table table-hover table-striped table-bordered table-responsive box-shadow" style="background-color:#f4f1de;">
+            <thead>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Name)</td>
+                    <td>@Html.DisplayNameFor(model => model.Age)</td>
+                    <td>@Html.DisplayNameFor(model => model.Email)</td>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var passenger in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelitem => passenger.Name)</td>
+                        <td>@Html.DisplayFor(modelitem => passenger.Age)</td>
+                        <td>@Html.DisplayFor(modelitem => passenger.Email)</td>
+                        <td>@Html.ActionLink("Edit", "Edit", new { id = passenger.PassengerID })</td>
+                        <td>@Html.ActionLink("Details", "Details", new { id = passenger.PassengerID })</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    <!-- When identifying which controller to use, leave out the 'Controller' part of the name-->
+    <input type="button" class="btn btn-primary" value="Add Passenger"
+           onclick="location.href='@Url.Action("Create", "Passengers")'" />
+</div>

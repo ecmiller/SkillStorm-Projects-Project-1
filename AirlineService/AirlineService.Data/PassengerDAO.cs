@@ -40,6 +40,7 @@ namespace AirlineService.Data
                         passenger.Name = reader["Name"].ToString();
                         passenger.Age = Convert.ToInt32(reader["Age"]);
                         passenger.Email = reader["Email"].ToString();
+                        passenger.Bookings = GetBookings(id);
                     }
 
                 }
@@ -74,8 +75,9 @@ namespace AirlineService.Data
                         Passenger temp = new Passenger();
                         temp.PassengerID = Convert.ToInt32(reader["PassengerID"]);
                         temp.Name = reader["Name"].ToString();
-                        temp.Age = Convert.ToInt32(reader["DepartureLocation"]);
-                        temp.Email = reader["DepartureTime"].ToString();
+                        temp.Age = Convert.ToInt32(reader["Age"]);
+                        temp.Email = reader["Email"].ToString();
+                        temp.Bookings = GetBookings(temp.PassengerID);
 
                         // --- TESTING ---
                         Console.WriteLine("Got this Passenger from the database -- " + temp.ToString());
@@ -100,7 +102,7 @@ namespace AirlineService.Data
             }
 
             return PassengerList;
-            }
+        }
 
 
         public void AddPassenger(Passenger passenger)
@@ -134,7 +136,7 @@ namespace AirlineService.Data
         {
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "DELETE * FROM airline.Passenger WHERE PassengerID = @ID";
+                string query = "DELETE FROM airline.Passengers WHERE PassengerID = @ID";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@ID", id);
@@ -179,6 +181,44 @@ namespace AirlineService.Data
                     conn.Close();
                 }
             }
+        }
+
+        public List<Booking> GetBookings(int id)
+        {
+            List<Booking> bookings = new List<Booking>();
+            string query = "SELECT * FROM airline.BOOKINGS WHERE ID = @ID";
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ID", id);
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Booking temp = new Booking();
+                        temp.PassengerID = Convert.ToInt32(reader["PassengerID"]);
+                        temp.FlightID = Convert.ToInt32(reader["FlightID"]);
+                        temp.BookingID = Convert.ToInt32(reader["BookingID"]);
+
+                        // --- TESTING ---
+                        Console.WriteLine("Got this Passenger from the database -- " + temp.ToString());
+                        bookings.Add(temp);
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine("Could not get all the Passengers!\n{0}", ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            return bookings;
         }
     }
 }
