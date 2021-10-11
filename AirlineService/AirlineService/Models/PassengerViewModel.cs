@@ -25,7 +25,7 @@ namespace AirlineService.Models
         public string Email { get; set; } // Email
 
         [Display(Name = "Bookings")]
-        public List<Booking> Bookings { get; set; }
+        public SortedSet<Booking> Bookings { get; set; }
 
         public override string ToString()
         {

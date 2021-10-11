@@ -21,7 +21,7 @@ namespace AirlineService.Data
         public string Email { get; set; } // Email
 
         [Display(Name = "Bookings")]
-        public List<Booking> Bookings { get; set; } // TODO
+        public SortedSet<Booking> Bookings { get; set; } // TODO
 
         public Passenger() { }
 

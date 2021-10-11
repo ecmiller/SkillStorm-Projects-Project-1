@@ -4,12 +4,12 @@
 @model IEnumerable<AirlineService.Models.PassengerViewModel>;
 
 @{
-    ViewData["Title"] = "Flights";
+    ViewData["Title"] = "Passengers";
 }
 <div class="text-center">
-    <h2>Viewing All Flights</h2>
+    <h2>Viewing All Passengers</h2>
     <div class="contiainer-fluid">
-        <table class="table table-hover table-striped table-bordered table-responsive box-shadow" style="background-color:#f4f1de;">
+        <table class="table table-hover table-striped table-bordered box-shadow" style="background-color:#f4f1de;">
             <thead>
                 <tr>
                     <td>@Html.DisplayNameFor(model => model.Name)</td>

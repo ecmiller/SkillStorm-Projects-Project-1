@@ -20,6 +20,7 @@
     </dl>
 </div>
 <div>
+    @Html.ActionLink("Book Flight", "BookFlight", new { id = Model.PassengerID }) |
     @Html.ActionLink("Edit", "Edit", new { id = Model.PassengerID }) |
     @Html.ActionLink("Delete", "Delete", new { id = Model.PassengerID }) |
     <a asp-action="Index">Back to List</a>

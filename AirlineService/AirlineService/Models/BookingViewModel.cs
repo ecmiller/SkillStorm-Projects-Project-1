@@ -1,10 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace AirlineService.Data
+namespace AirlineService.Models
 {
-
-    public class Booking
+    public class BookingViewModel
     {
         [Display(Name = "Booking ID")]
         public int BookingID { get; set; }
@@ -14,14 +13,6 @@ namespace AirlineService.Data
 
         [Display(Name = "FlightID")]
         public int FlightID { get; set; }
-
-        public Booking() { }
-
-        public Booking(int passengerID, int flightID)
-        {
-            this.PassengerID = passengerID;
-            this.FlightID = flightID;
-        }
 
         public override string ToString()
         {

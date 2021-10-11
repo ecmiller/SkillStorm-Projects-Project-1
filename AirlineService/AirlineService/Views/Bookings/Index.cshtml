@@ -1,0 +1,44 @@
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<AirlineService.Models.BookingViewModel>;
+
+@{ ViewData["Title"] = "Bookings"; }
+
+<h1>Index</h1>
+<div class="text-center">
+    <h2>Viewing All Bookings</h2>
+    <div class="contiainer-fluid">
+        <table class="table table-hover table-striped table-bordered box-shadow" style="background-color:#f4f1de;">
+            <thead>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.BookingID)</td>
+                    <td>@Html.DisplayNameFor(model => model.PassengerID)</td>
+                    <td>@Html.DisplayNameFor(model => model.FlightID)</td>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var booking in Model)
+                {
+    <tr>
+        <td>@Html.DisplayFor(modelitem => booking.BookingID)</td>
+        <td>@Html.DisplayFor(modelitem => booking.PassengerID)</td>
+        <td>@Html.DisplayFor(modelitem => booking.FlightID)</td>
+        <td>@Html.ActionLink("Delete", "Delete", new { id = booking.BookingID })</td>
+        <td>@Html.ActionLink("Details", "Details", new { id = booking.BookingID })</td>
+    </tr>}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div>
+    <!-- When identifying which controller to use, leave out the 'Controller' part of the name-->
+    <input type="button" class="btn btn-primary" value="New Booking"
+           onclick="location.href='@Url.Action("Create", "Bookings")'" />
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

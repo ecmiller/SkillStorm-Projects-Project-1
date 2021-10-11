@@ -77,7 +77,7 @@ namespace AirlineService.Data
                         temp.Name = reader["Name"].ToString();
                         temp.Age = Convert.ToInt32(reader["Age"]);
                         temp.Email = reader["Email"].ToString();
-                        temp.Bookings = GetBookings(temp.PassengerID);
+                        // temp.Bookings = GetBookings(temp.PassengerID);
 
                         // --- TESTING ---
                         Console.WriteLine("Got this Passenger from the database -- " + temp.ToString());
@@ -183,41 +183,16 @@ namespace AirlineService.Data
             }
         }
 
-        public List<Booking> GetBookings(int id)
+        public SortedSet<Booking> GetBookings(int id)
         {
-            List<Booking> bookings = new List<Booking>();
-            string query = "SELECT * FROM airline.BOOKINGS WHERE ID = @ID";
+            SortedSet<Booking> bookings = new SortedSet<Booking>();
+            IEnumerable<Booking> temp = new BookingDAO().GetBookingsForPassenger(id);
 
-            using (SqlConnection conn = new SqlConnection(connString))
+            foreach(Booking b in temp)
             {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@ID", id);
-                try
-                {
-                    conn.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        Booking temp = new Booking();
-                        temp.PassengerID = Convert.ToInt32(reader["PassengerID"]);
-                        temp.FlightID = Convert.ToInt32(reader["FlightID"]);
-                        temp.BookingID = Convert.ToInt32(reader["BookingID"]);
-
-                        // --- TESTING ---
-                        Console.WriteLine("Got this Passenger from the database -- " + temp.ToString());
-                        bookings.Add(temp);
-                    }
-                }
-                catch (SqlException ex)
-                {
-                    Console.WriteLine("Could not get all the Passengers!\n{0}", ex.Message);
-                }
-                finally
-                {
-                    conn.Close();
-                }
+                bookings.Add(b);
             }
+
             return bookings;
         }
     }
