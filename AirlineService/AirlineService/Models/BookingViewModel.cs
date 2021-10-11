@@ -8,11 +8,16 @@ namespace AirlineService.Models
         [Display(Name = "Booking ID")]
         public int BookingID { get; set; }
 
+        [Required]
         [Display(Name = "Passenger ID")]
         public int PassengerID { get; set; }
 
-        [Display(Name = "FlightID")]
+        [Required]
+        [Display(Name = "Flight ID")]
         public int FlightID { get; set; }
+
+        [Display(Name = "Confirmation Number")]
+        public string ConfirmationNumber { get; set; }
 
         public override string ToString()
         {

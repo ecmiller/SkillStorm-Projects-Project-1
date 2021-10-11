@@ -13,7 +13,7 @@ namespace AirlineService.Controllers
     {
         private readonly IFlightDAO flightDAO;
 
-        
+
         public FlightsController(IFlightDAO FlightDao)
         {
             this.flightDAO = FlightDao;
@@ -66,8 +66,7 @@ namespace AirlineService.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, IFormCollection collection)
         {
-            Flight newFlight = new Flight();
-            newFlight.FlightID = id;
+            Flight newFlight = flightDAO.GetFlight(id);
             newFlight.Airline = collection["Airline"];
             newFlight.DepartureLocation = collection["DepartureLocation"];
             newFlight.DepartureTime = DateTime.Parse(collection["DepartureTime"]);
@@ -76,16 +75,13 @@ namespace AirlineService.Controllers
             newFlight.SeatsRemaining = int.Parse(collection["SeatsRemaining"]);
             newFlight.MaxCapacity = int.Parse(collection["MaxCapacity"]);
 
-            // --- TESTING ---
-            // Console.WriteLine("Flight sent into the edit call " + newFlight.ToString());
             if (ModelState.IsValid)
             {
-                Console.WriteLine("Old flight data: " + flightDAO.GetFlight(newFlight.FlightID).ToString());
                 flightDAO.UpdateFlight(newFlight);
-                Console.WriteLine("New flight data" + flightDAO.GetFlight(newFlight.FlightID).ToString());
 
                 return RedirectToAction("Index");
-            } else
+            }
+            else
             {
                 Console.WriteLine("[Update Action] ModelState was invalid");
             }
@@ -120,32 +116,29 @@ namespace AirlineService.Controllers
                 flightDAO.AddFlight(newFlight);
 
                 return RedirectToAction("Index");
+            } else
+            {
+                Console.WriteLine("The Flight you are trying to add is not valid");
             }
 
             return View();
         }
 
         // GET: Flights/Delete/5
-        public ActionResult Delete(int? id)
+        public IActionResult Delete(int id)
         {
-            return RedirectToAction("Index");
+            Flight model = flightDAO.GetFlight(id);
+            return View(model);
         }
 
         // POST: Flights/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(int id, IFormCollection collection)
         {
-            try
-            {
-                // TODO: Add delete logic here
-                flightDAO.RemoveFlight(id);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            flightDAO.RemoveFlight(id);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

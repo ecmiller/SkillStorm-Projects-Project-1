@@ -1,0 +1,68 @@
+@model AirlineService.Data.Flight;
+
+@{ ViewData["Title"] = "Delete"; }
+
+<h1>Delete</h1>
+<div>
+    <h4>Are you sure you want to delete Flight #@Html.DisplayFor(model => model.FlightID)?</h4>
+    <hr />
+    <div>
+        <form asp-action="Delete" method="post">
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Airline)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Airline)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DepartureLocation)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DepartureLocation)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DepartureTime)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DepartureTime)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ArrivalLocation)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ArrivalLocation)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ArrivalTime)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ArrivalTime)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.SeatsRemaining)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.SeatsRemaining)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.MaxCapacity)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.MaxCapacity)
+                </dd>
+            </dl>
+            <div class="form-group">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Cancel</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

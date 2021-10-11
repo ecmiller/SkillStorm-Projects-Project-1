@@ -12,8 +12,11 @@ namespace AirlineService.Data
         [Display(Name = "Passenger ID")]
         public int PassengerID { get; set; }
 
-        [Display(Name = "FlightID")]
+        [Display(Name = "Flight ID")]
         public int FlightID { get; set; }
+
+        [Display(Name = "Confirmation Number")]
+        public string ConfirmationNumber { get; set; }
 
         public Booking() { }
 
@@ -21,6 +24,7 @@ namespace AirlineService.Data
         {
             this.PassengerID = passengerID;
             this.FlightID = flightID;
+            this.ConfirmationNumber = $"P{this.PassengerID}-F{this.FlightID}";
         }
 
         public override string ToString()

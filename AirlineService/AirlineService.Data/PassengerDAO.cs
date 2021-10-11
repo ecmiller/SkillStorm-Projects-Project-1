@@ -18,6 +18,7 @@ namespace AirlineService.Data
         public Passenger GetPassenger(int id)
         {
             Passenger passenger = new Passenger();
+            BookingDAO bookingDAO = new BookingDAO();
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -40,7 +41,12 @@ namespace AirlineService.Data
                         passenger.Name = reader["Name"].ToString();
                         passenger.Age = Convert.ToInt32(reader["Age"]);
                         passenger.Email = reader["Email"].ToString();
-                        passenger.Bookings = GetBookings(id);
+                        passenger.Bookings = new List<string>();
+
+                        foreach(Booking b in bookingDAO.GetBookingsForPassenger(id))
+                        {
+                            passenger.Bookings.Add(b.ConfirmationNumber);
+                        }
                     }
 
                 }
@@ -155,7 +161,7 @@ namespace AirlineService.Data
             }
         }
 
-        void IPassengerDAO.UpdatePassenger(Passenger passenger)
+        public void UpdatePassenger(Passenger passenger)
         {
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -166,7 +172,7 @@ namespace AirlineService.Data
                 cmd.Parameters.AddWithValue("@Name", passenger.Name);
                 cmd.Parameters.AddWithValue("@Age", passenger.Age);
                 cmd.Parameters.AddWithValue("@Email", passenger.Email);
-
+                Console.WriteLine("Updating with passenger info--" + passenger.ToString());
                 try
                 {
                     conn.Open();
@@ -183,9 +189,9 @@ namespace AirlineService.Data
             }
         }
 
-        public SortedSet<Booking> GetBookings(int id)
+        public List<Booking> GetBookings(int id)
         {
-            SortedSet<Booking> bookings = new SortedSet<Booking>();
+            List<Booking> bookings = new List<Booking>();
             IEnumerable<Booking> temp = new BookingDAO().GetBookingsForPassenger(id);
 
             foreach(Booking b in temp)

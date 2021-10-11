@@ -138,6 +138,8 @@ namespace AirlineService.Data
 
         public void RemoveFlight(int id)
         {
+            Console.WriteLine("Trying to remove flight " + id);
+
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 string query = "DELETE FROM airline.Flights WHERE FlightID = @ID";
@@ -155,11 +157,12 @@ namespace AirlineService.Data
                 {
                     Console.WriteLine("Failed to remove flight {0} from the database.\n{1}", id, ex.Message);
                 }
-                Console.WriteLine("RemoveFlight method end");
             }
+
+            Console.WriteLine("RemoveFlight method end");
         }
 
-        public void UpdateFlight(Flight flight)
+        public void UpdateFlight(Flight flight) // Working
         {
 
             using (SqlConnection conn = new SqlConnection(connString))

@@ -26,7 +26,7 @@ namespace AirlineService.Data
             if (flight.SeatsRemaining > 0)
             {
                 Booking booking = new Booking(passID, flightID);
-                passenger.Bookings.Add(booking);
+                passenger.Bookings.Add(booking.ConfirmationNumber);
                 flight.SeatsRemaining--;
 
                 using (SqlConnection conn = new SqlConnection(connString))
@@ -56,10 +56,33 @@ namespace AirlineService.Data
             {
                 Console.WriteLine("There were no seats avaialble on flight " + flightID);
             }
+
+            Console.WriteLine($"Booked passenger {passID} on flight {flightID}");
         }
 
         public void RemoveBooking(int bookingID)
         {
+            PassengerDAO passengerDAO = new PassengerDAO();
+            FlightDAO flightDAO = new FlightDAO();
+            Booking booking = GetBooking(bookingID);
+
+            // Remove the confirmation number from the passenger's booking list
+            Passenger passenger = passengerDAO.GetPassenger(booking.PassengerID);
+            passenger.Bookings.Remove(booking.ConfirmationNumber);
+            passengerDAO.UpdatePassenger(passenger);
+
+            // One seat is now free, so we increment the remaining seats by 1
+            Flight flight = flightDAO.GetFlight(booking.FlightID);
+            if (flight.SeatsRemaining < flight.MaxCapacity)
+            {
+                flight.SeatsRemaining++;
+                flightDAO.UpdateFlight(flight);
+            }
+            else
+            {
+                Console.WriteLine("Seats available already met or exceeded max capacity");
+            }
+
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 string query = "DELETE FROM airline.Bookings WHERE BookingID = @ID";

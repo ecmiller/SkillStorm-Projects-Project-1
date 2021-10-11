@@ -20,7 +20,7 @@ namespace AirlineService.Controllers
         }
 
         // GET: Passengers
-        public ActionResult Index()
+        public IActionResult Index()
         {
             IEnumerable<Passenger> mPassengers = passengerDAO.GetPassengers();
             List<PassengerViewModel> model = new List<PassengerViewModel>();
@@ -45,14 +45,15 @@ namespace AirlineService.Controllers
         }
 
         // GET: Passengers/Details/5
-        public ActionResult Details(int id)
+        public IActionResult Details(int id)
         {
-            Passenger passenger = passengerDAO.GetPassenger(id);
-            return View();
+            Passenger model = passengerDAO.GetPassenger(id);
+            return View(model);
         }
 
         // GET: Passengers/Create
-        public ActionResult Create()
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
@@ -60,7 +61,7 @@ namespace AirlineService.Controllers
         // POST: Passengers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind] PassengerViewModel passenger)
+        public IActionResult Create([Bind] PassengerViewModel passenger)
         {
             if(ModelState.IsValid)
             {
@@ -68,17 +69,20 @@ namespace AirlineService.Controllers
                 newPassenger.Name = passenger.Name;
                 newPassenger.Age = passenger.Age;
                 newPassenger.Email = passenger.Email;
-                newPassenger.Bookings = passenger.Bookings;
 
-                Console.WriteLine("Adding passenger " + passenger.ToString());
+                // Console.WriteLine("Adding passenger " + passenger.ToString());
                 return RedirectToAction("Index");
+            } else
+            {
+                Console.WriteLine("The Passenger you are trying to add is not valid");
             }
 
             return View();
         }
 
         // GET: Passengers/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public IActionResult Edit(int id)
         {
             Passenger model = passengerDAO.GetPassenger(id);
             return View(model);
@@ -87,10 +91,10 @@ namespace AirlineService.Controllers
         // POST: Passengers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(int id, IFormCollection collection)
         {
-            Passenger newPassenger = new Passenger();
-            newPassenger.PassengerID = id;
+            Console.WriteLine("Called the edit command for id: " + id);
+            Passenger newPassenger = passengerDAO.GetPassenger(id);
             newPassenger.Name = collection["Name"];
             newPassenger.Age = int.Parse(collection["Age"]);
             newPassenger.Email = collection["Email"];
@@ -98,6 +102,7 @@ namespace AirlineService.Controllers
             if(ModelState.IsValid)
             {
                 passengerDAO.UpdatePassenger(newPassenger);
+
                 return RedirectToAction("Index");
             } else
             {
@@ -108,25 +113,20 @@ namespace AirlineService.Controllers
         }
 
         // GET: Passengers/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
-            return RedirectToAction("Index");
+            Passenger model = passengerDAO.GetPassenger(id);
+            return View(model);
         }
 
-        // POST: Passengers/Delete/5
+        // POST: Flights/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(int id, IFormCollection collection)
         {
-            try
-            {
-                passengerDAO.RemovePassenger(id);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            passengerDAO.RemovePassenger(id);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

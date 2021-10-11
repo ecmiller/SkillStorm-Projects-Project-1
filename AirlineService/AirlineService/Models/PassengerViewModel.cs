@@ -20,12 +20,13 @@ namespace AirlineService.Models
         [Display(Name = "Age")]
         public int Age { get; set; } // Age
 
+        [Required]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; } // Email
 
         [Display(Name = "Bookings")]
-        public SortedSet<Booking> Bookings { get; set; }
+        public List<string> Bookings { get; set; }
 
         public override string ToString()
         {

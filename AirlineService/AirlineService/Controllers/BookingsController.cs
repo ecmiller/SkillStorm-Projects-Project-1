@@ -44,7 +44,8 @@ namespace AirlineService.Controllers
         // GET: Bookings/Details/5
         public IActionResult Details(int id)
         {
-            return View();
+            Booking model = bookingsDAO.GetBooking(id);
+            return View(model);
         }
 
         // GET: Bookings/Create
@@ -60,60 +61,32 @@ namespace AirlineService.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                bookingsDAO.BookFlight(int.Parse(collection["PassengerID"]), int.Parse(collection["FlightID"]));
             }
             catch
             {
                 return View();
             }
+
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: Bookings/Edit/5
-        public IActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: Bookings/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Bookings/Delete/5
+        // GET: Flights/Delete/5
         public IActionResult Delete(int id)
         {
-            return View();
+            Booking model = bookingsDAO.GetBooking(id);
+            return View(model);
         }
 
-        // POST: Bookings/Delete/5
+        // POST: Flights/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id, IFormCollection collection)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            bookingsDAO.RemoveBooking(id);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }
