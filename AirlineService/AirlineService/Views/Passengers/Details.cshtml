@@ -26,6 +26,17 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Email)
         </dd>
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.Bookings)
+        </dt>
+
+        @foreach (var confNum in Model.Bookings)
+        {
+            <dd>
+                @Html.Display(confNum + "\n");
+            </dd>
+        }
+
     </dl>
 </div>
 <div>

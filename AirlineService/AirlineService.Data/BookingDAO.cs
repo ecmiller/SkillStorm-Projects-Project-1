@@ -36,6 +36,7 @@ namespace AirlineService.Data
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@PassengerID", passID);
                     cmd.Parameters.AddWithValue("@FlightID", flightID);
+                    cmd.Parameters.AddWithValue("@ConfirmationNumber", $"P{passID}-F{flightID}");
 
                     try
                     {
@@ -123,6 +124,7 @@ namespace AirlineService.Data
                         temp.BookingID = Convert.ToInt32(reader["BookingID"]);
                         temp.PassengerID = Convert.ToInt32(reader["PassengerID"]);
                         temp.FlightID = Convert.ToInt32(reader["FlightID"]);
+                        temp.ConfirmationNumber = reader["ConfirmationNumber"].ToString();
 
                         // --- TESTING ---
                         Console.WriteLine("Got this Booking from the database -- " + temp.ToString());
@@ -173,6 +175,7 @@ namespace AirlineService.Data
                         booking.BookingID = Convert.ToInt32(reader["BookingID"]);
                         booking.PassengerID = Convert.ToInt32(reader["PassengerID"]);
                         booking.FlightID = Convert.ToInt32(reader["BookingID"]);
+                        booking.ConfirmationNumber = reader["ConfirmationNumber"].ToString();
                     }
                 }
                 catch (SqlException ex)
@@ -206,6 +209,7 @@ namespace AirlineService.Data
                         temp.BookingID = Convert.ToInt32(reader["BookingID"]);
                         temp.PassengerID = Convert.ToInt32(reader["PassengerID"]);
                         temp.FlightID = Convert.ToInt32(reader["FlightID"]);
+                        temp.ConfirmationNumber = reader["ConfirmationNumber"].ToString();
 
                         // --- TESTING ---
                         Console.WriteLine("Got this Booking from the database -- " + temp.ToString());

@@ -66,6 +66,7 @@ namespace AirlineService.Data
         public IEnumerable<Passenger> GetPassengers()
         {
             List<Passenger> PassengerList = new List<Passenger>();
+            BookingDAO bookingDAO = new BookingDAO();
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -83,8 +84,12 @@ namespace AirlineService.Data
                         temp.Name = reader["Name"].ToString();
                         temp.Age = Convert.ToInt32(reader["Age"]);
                         temp.Email = reader["Email"].ToString();
-                        // temp.Bookings = GetBookings(temp.PassengerID);
+                        temp.Bookings = new List<string>();
 
+                        foreach (Booking b in bookingDAO.GetBookingsForPassenger(temp.PassengerID))
+                        {
+                            temp.Bookings.Add(b.ConfirmationNumber);
+                        }
                         // --- TESTING ---
                         Console.WriteLine("Got this Passenger from the database -- " + temp.ToString());
                         PassengerList.Add(temp);

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Data;
-using AirlineService.Data;
 
 namespace AirlineService.Models
 {
@@ -26,7 +24,7 @@ namespace AirlineService.Models
         public string Email { get; set; } // Email
 
         [Display(Name = "Bookings")]
-        public List<string> Bookings { get; set; }
+        public List<string> Bookings { get; set; } = new List<string>();
 
         public override string ToString()
         {
