@@ -23,10 +23,8 @@ namespace AirlineService.Data
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 string query = "SELECT * FROM airline.Passengers WHERE PassengerID = @ID";
-
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.Add("@ID", System.Data.SqlDbType.Int);
-                cmd.Parameters["@ID"].Value = id;
+                cmd.Parameters.AddWithValue("@ID", id);
 
                 try
                 {
@@ -41,12 +39,7 @@ namespace AirlineService.Data
                         passenger.Name = reader["Name"].ToString();
                         passenger.Age = Convert.ToInt32(reader["Age"]);
                         passenger.Email = reader["Email"].ToString();
-                        passenger.Bookings = new List<string>();
-
-                        foreach(Booking b in bookingDAO.GetBookingsForPassenger(id))
-                        {
-                            passenger.Bookings.Add(b.ConfirmationNumber);
-                        }
+                        passenger.Bookings = GetBookings(id);
                     }
 
                 }
@@ -177,6 +170,8 @@ namespace AirlineService.Data
                 cmd.Parameters.AddWithValue("@Name", passenger.Name);
                 cmd.Parameters.AddWithValue("@Age", passenger.Age);
                 cmd.Parameters.AddWithValue("@Email", passenger.Email);
+
+                //-- Testing --
                 Console.WriteLine("Updating with passenger info--" + passenger.ToString());
                 try
                 {
@@ -194,17 +189,38 @@ namespace AirlineService.Data
             }
         }
 
-        public List<Booking> GetBookings(int id)
+        public List<string> GetBookings(int id)
         {
-            List<Booking> bookings = new List<Booking>();
-            IEnumerable<Booking> temp = new BookingDAO().GetBookingsForPassenger(id);
+            List<string> confNumbers = new List<string>();
 
-            foreach(Booking b in temp)
+            using (SqlConnection conn = new SqlConnection(connString))
             {
-                bookings.Add(b);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM airline.Bookings WHERE PassengerID = @ID", conn);
+                cmd.Parameters.AddWithValue("@ID", id);
+
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        string temp = reader["ConfirmationNumber"].ToString();
+
+                        confNumbers.Add(temp);
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine("Could not get all the Passengers!\n{0}", ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
             }
 
-            return bookings;
+            return confNumbers;
         }
     }
 }

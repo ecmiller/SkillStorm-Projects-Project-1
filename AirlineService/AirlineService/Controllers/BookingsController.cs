@@ -30,7 +30,8 @@ namespace AirlineService.Controllers
                 {
                     BookingID = booking.BookingID,
                     PassengerID = booking.PassengerID,
-                    FlightID = booking.FlightID
+                    FlightID = booking.FlightID,
+                    ConfirmationNumber = booking.ConfirmationNumber
                 };
 
                 // --- TESTING ---

@@ -11,6 +11,6 @@ namespace AirlineService.Data
         public Passenger GetPassenger(int passengerID);
         public void UpdatePassenger(Passenger passenger);
         public void RemovePassenger(int id);
-        public List<Booking> GetBookings(int id);
+        public List<string> GetBookings(int id);
     }
 }

@@ -37,7 +37,7 @@ namespace AirlineService.Controllers
                 };
 
                 // --- TESTING ---
-                // Console.WriteLine("Made a flightviewmodel -- " + temp.ToString());
+                // Console.WriteLine("Made a PassengerViewModel -- " + temp.ToString());
                 model.Add(temp);
             }
 
@@ -61,16 +61,18 @@ namespace AirlineService.Controllers
         // POST: Passengers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind] PassengerViewModel passenger)
+        public IActionResult Create(IFormCollection collection)
         {
             if(ModelState.IsValid)
             {
                 Passenger newPassenger = new Passenger();
-                newPassenger.Name = passenger.Name;
-                newPassenger.Age = passenger.Age;
-                newPassenger.Email = passenger.Email;
+                newPassenger.Name = collection["Name"];
+                newPassenger.Age = int.Parse(collection["Age"]);
+                newPassenger.Email = collection["Email"];
+                newPassenger.Bookings = new List<string>();
 
-                // Console.WriteLine("Adding passenger " + passenger.ToString());
+                passengerDAO.AddPassenger(newPassenger);
+
                 return RedirectToAction("Index");
             } else
             {
