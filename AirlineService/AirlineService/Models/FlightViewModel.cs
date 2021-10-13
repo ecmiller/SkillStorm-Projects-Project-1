@@ -6,6 +6,7 @@ namespace AirlineService.Models
 {
     public class FlightViewModel
     {
+        [Display(Name = "ID")]
         public int FlightID { get; set; }
 
         [Required]

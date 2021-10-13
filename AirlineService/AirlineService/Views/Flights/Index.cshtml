@@ -7,12 +7,14 @@
 @{
     ViewData["Title"] = "Flights";
 }
-    <div class="text-center"">
-        <h2>Viewing All Flights</h2>
+    <div class="text-center">
+        <h2>Flights</h2>
+        <hr />
         <div class="contiainer-fluid">
             <table class="table table-hover table-striped table-bordered table-responsive box-shadow" style="background-color:#f4f1de;">
                 <thead>
                     <tr>
+                        <td>@Html.DisplayNameFor(model => model.FlightID)</td>
                         <td>@Html.DisplayNameFor(model => model.Airline)</td>
                         <td>@Html.DisplayNameFor(model => model.DepartureLocation)</td>
                         <td>@Html.DisplayNameFor(model => model.DepartureTime)</td>
@@ -28,6 +30,7 @@
                     @foreach (var flight in Model)
                     {
                         <tr>
+                            <td>@Html.DisplayFor(modelitem => flight.FlightID)</td>
                             <td>@Html.DisplayFor(modelitem => flight.Airline)</td>
                             <td>@Html.DisplayFor(modelitem => flight.DepartureLocation)</td>
                             <td>@Html.DisplayFor(modelitem => flight.DepartureTime)</td>

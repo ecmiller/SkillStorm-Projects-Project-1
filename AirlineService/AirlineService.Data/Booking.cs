@@ -6,7 +6,7 @@ namespace AirlineService.Data
 
     public class Booking
     {
-        [Display(Name = "Booking ID")]
+        [Display(Name = "ID")]
         public int BookingID { get; set; }
 
         [Display(Name = "Passenger ID")]

@@ -7,6 +7,7 @@ namespace AirlineService.Models
 {
     public class PassengerViewModel
     {
+        [Display(Name = "ID")]
         public int PassengerID { get; set; }
 
         [Required]

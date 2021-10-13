@@ -5,7 +5,7 @@ namespace AirlineService.Models
 {
     public class BookingViewModel
     {
-        [Display(Name = "Booking ID")]
+        [Display(Name = "ID")]
         public int BookingID { get; set; }
 
         [Required]

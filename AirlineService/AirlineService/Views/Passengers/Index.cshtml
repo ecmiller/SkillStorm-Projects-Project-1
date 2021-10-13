@@ -7,11 +7,13 @@
     ViewData["Title"] = "Passengers";
 }
 <div class="text-center">
-    <h2>Viewing All Passengers</h2>
+    <h2>Passengers</h2>
+    <hr />
     <div class="contiainer-fluid">
         <table class="table table-hover table-striped table-bordered box-shadow" style="background-color:#f4f1de;">
             <thead>
                 <tr>
+                    <td>@Html.DisplayNameFor(model => model.PassengerID)</td>
                     <td>@Html.DisplayNameFor(model => model.Name)</td>
                     <td>@Html.DisplayNameFor(model => model.Age)</td>
                     <td>@Html.DisplayNameFor(model => model.Email)</td>
@@ -22,13 +24,14 @@
             <tbody>
                 @foreach (var passenger in Model)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(modelitem => passenger.Name)</td>
-                        <td>@Html.DisplayFor(modelitem => passenger.Age)</td>
-                        <td>@Html.DisplayFor(modelitem => passenger.Email)</td>
-                        <td>@Html.ActionLink("Edit", "Edit", new { id = passenger.PassengerID })</td>
-                        <td>@Html.ActionLink("Details", "Details", new { id = passenger.PassengerID })</td>
-                    </tr>
+                <tr>
+                    <td>@Html.DisplayFor(modelitem => passenger.PassengerID)</td>
+                    <td>@Html.DisplayFor(modelitem => passenger.Name)</td>
+                    <td>@Html.DisplayFor(modelitem => passenger.Age)</td>
+                    <td>@Html.DisplayFor(modelitem => passenger.Email)</td>
+                    <td>@Html.ActionLink("Edit", "Edit", new { id = passenger.PassengerID })</td>
+                    <td>@Html.ActionLink("Details", "Details", new { id = passenger.PassengerID })</td>
+                </tr>
                 }
             </tbody>
         </table>

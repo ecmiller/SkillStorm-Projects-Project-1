@@ -7,6 +7,7 @@ namespace AirlineService.Data
 {
     public class Passenger
     {
+        [Display(Name = "ID")]
         public int PassengerID { get; set; }
 
         [Display(Name = "Name")]

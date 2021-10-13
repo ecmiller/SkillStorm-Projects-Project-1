@@ -5,9 +5,9 @@
 
 @{ ViewData["Title"] = "Bookings"; }
 
-<h1>Index</h1>
 <div class="text-center">
-    <h2>Viewing All Bookings</h2>
+    <h2>Bookings</h2>
+    <hr />
     <div class="contiainer-fluid">
         <table class="table table-hover table-striped table-bordered box-shadow" style="background-color:#f4f1de;">
             <thead>
@@ -23,15 +23,14 @@
             <tbody>
                 @foreach (var booking in Model)
                 {
-                <tr>
-                    <td>@Html.DisplayFor(modelitem => booking.BookingID)</td>
-                    <td>@Html.DisplayFor(modelitem => booking.PassengerID)</td>
-                    <td>@Html.DisplayFor(modelitem => booking.FlightID)</td>
-                    <td>@Html.DisplayFor(modelitem => booking.ConfirmationNumber)</td>
-                    <td>@Html.ActionLink("Delete", "Delete", new { id = booking.BookingID })</td>
-                    <td>@Html.ActionLink("Details", "Details", new { id = booking.BookingID })</td>
-                </tr>
-                }
+    <tr>
+        <td>@Html.DisplayFor(modelitem => booking.BookingID)</td>
+        <td>@Html.DisplayFor(modelitem => booking.PassengerID)</td>
+        <td>@Html.DisplayFor(modelitem => booking.FlightID)</td>
+        <td>@Html.DisplayFor(modelitem => booking.ConfirmationNumber)</td>
+        <td>@Html.ActionLink("Delete", "Delete", new { id = booking.BookingID })</td>
+        <td>@Html.ActionLink("Details", "Details", new { id = booking.BookingID })</td>
+    </tr>}
             </tbody>
         </table>
     </div>

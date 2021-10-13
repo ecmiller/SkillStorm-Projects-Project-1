@@ -61,6 +61,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  background-color:#e4dfda;
 }
 .footer {
   position: absolute;
@@ -73,9 +74,13 @@ body {
 /* Custom
 -------------------------------------------------- */
 thead {
-    background-color:saddlebrown;
+    background-color:#d4b483;
 }
 
-tbody{
-    background-color:beige;
+tbody, jumbotron {
+    background-color:#eadac2;
+}
+
+nav {
+    background-color:#bfc0c0;
 }

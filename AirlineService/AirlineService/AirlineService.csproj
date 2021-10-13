@@ -34,6 +34,7 @@
     <Folder Include="wwwroot\fontawesome\" />
     <Folder Include="wwwroot\fontawesome\webfonts\" />
     <Folder Include="Views\Bookings\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\fontawesome\" />
@@ -54,6 +55,7 @@
     <Content Remove="wwwroot\fontawesome\webfonts\fa-solid-900.woff2" />
     <Content Remove="wwwroot\fontawesome\webfonts\" />
     <Content Remove="wwwroot\fontawesome\all.css" />
+    <Content Remove="wwwroot\images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\fontawesome\webfonts\fa-brands-400.eot" />
