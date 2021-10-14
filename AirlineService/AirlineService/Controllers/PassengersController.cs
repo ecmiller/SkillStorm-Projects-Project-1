@@ -128,7 +128,7 @@ namespace AirlineService.Controllers
         {
             passengerDAO.RemovePassenger(id);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
     }
 }

@@ -60,34 +60,38 @@ namespace AirlineService.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(IFormCollection collection)
         {
-            try
+            if (ModelState.IsValid)
             {
-                bookingsDAO.BookFlight(int.Parse(collection["PassengerID"]), int.Parse(collection["FlightID"]));
-            }
-            catch
+                int pid = int.Parse(collection["PassengerID"]);
+                int fid = int.Parse(collection["FlightID"]);
+
+                bookingsDAO.BookFlight(pid, fid);
+                return RedirectToAction("Index");
+            } else
             {
-                return View();
+                Console.WriteLine("The Booking you are trying to add is not valid");
             }
 
-            return RedirectToAction(nameof(Index));
+            return View();
         }
 
 
-        // GET: Flights/Delete/5
+        // GET: Bookings/Delete/5
         public IActionResult Delete(int id)
         {
             Booking model = bookingsDAO.GetBooking(id);
             return View(model);
         }
 
-        // POST: Flights/Delete/5
+        // POST: Bookings/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id, IFormCollection collection)
         {
-            bookingsDAO.RemoveBooking(id);
+            Booking booking = bookingsDAO.GetBooking(id);
+            bookingsDAO.RemoveBooking(booking);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
     }
 }

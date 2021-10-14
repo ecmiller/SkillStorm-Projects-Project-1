@@ -22,7 +22,7 @@ namespace AirlineService.Data
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("SELECT * FROM airline.Flights", conn);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM airline.Flights ORDER BY FlightID", conn);
 
                 try
                 {
@@ -57,7 +57,7 @@ namespace AirlineService.Data
             }
             // --- TESTING ---
             // Console.WriteLine("Final flight list:");
-            foreach (Flight f in FlightList) Console.WriteLine(f.ToString());
+            //foreach (Flight f in FlightList) Console.WriteLine(f.ToString());
             return FlightList;
         }
 

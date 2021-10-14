@@ -63,7 +63,7 @@ namespace AirlineService.Data
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                SqlCommand cmd = new SqlCommand("SELECT * FROM airline.Passengers", conn);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM airline.Passengers ORDER BY PassengerID", conn);
 
                 try
                 {
@@ -84,7 +84,7 @@ namespace AirlineService.Data
                             temp.Bookings.Add(b.ConfirmationNumber);
                         }
                         // --- TESTING ---
-                        Console.WriteLine("Got this Passenger from the database -- " + temp.ToString());
+                        //Console.WriteLine("Got this Passenger from the database -- " + temp.ToString());
                         PassengerList.Add(temp);
                     }
                 }
@@ -99,11 +99,11 @@ namespace AirlineService.Data
             }
 
             // --- TESTING ---
-            Console.WriteLine("Final Passenger list:");
-            foreach (Passenger p in PassengerList)
-            {
-                Console.WriteLine(p.ToString());
-            }
+            //Console.WriteLine("Final Passenger list:");
+            //foreach (Passenger p in PassengerList)
+            //{
+            //    Console.WriteLine(p.ToString());
+            //}
 
             return PassengerList;
         }

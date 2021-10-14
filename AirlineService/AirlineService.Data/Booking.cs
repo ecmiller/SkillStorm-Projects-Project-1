@@ -30,7 +30,7 @@ namespace AirlineService.Data
         public override string ToString()
         {
             // Returns a string F(flight number)-P(passenger number)
-            return $"Booking: {this.BookingID} Confirmation Number: {this.ConfirmationNumber}";
+            return $"Booking: {this.BookingID} PID: {this.PassengerID} FID: {this.FlightID} Confirmation Number: {this.ConfirmationNumber}";
         }
     }
 }
